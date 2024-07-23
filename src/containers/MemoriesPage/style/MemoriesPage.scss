@@ -1,0 +1,19 @@
+.memories-page {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding: 30px;
+}
+
+.memories-page__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow: auto;
+    height: 100%;
+}
+.memories-page__grid-item {
+    width: 100%;
+    height: 25vh;
+    border-radius: 25px;
+}
