@@ -6,14 +6,11 @@ import LockedIcon from './assets/locked-user.svg?jsx';
 
 import Header from './components/Header/Header';
 
-import {getUser} from '../handlers/user.handler';
+import {getUsersList} from '../api/users';
 
 const Layout = ({children}) => {
     const [auth, setAuth] = useState(true);
 
-    useEffect(() => {
-        getUser();
-    }, []);
     return (
         <div className="document">
             {!auth && (

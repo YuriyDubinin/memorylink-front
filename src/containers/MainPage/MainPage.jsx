@@ -1,5 +1,5 @@
-import React from 'react';
-import {NavLink} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import {NavLink, useParams} from 'react-router-dom';
 
 import './style/MainPage.scss';
 
@@ -8,7 +8,14 @@ import GalleryIcon from './assets/gallery.svg?jsx';
 import GalleryPlug from './assets/gallery-plug.jpeg?jsx';
 import MemoriesPlug from './assets/memories-plug.jpeg?jsx';
 
+import { getUser } from '../../api/users';
+
 const MainPage = () => {
+    const {key} = useParams()
+
+    useEffect(() => {
+        getUser({key});
+    }, [])
     return (
         <div className="main-page">
             <ul className="main-page__container">
