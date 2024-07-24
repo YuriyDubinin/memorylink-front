@@ -29,32 +29,36 @@ const MainPage = () => {
     useEffect(() => {
         dispatch(fetchUserInfo(key));
     }, []);
+
     return (
         <div className="main-page">
-            <ul className="main-page__container">
-                <NavLink to={`/memories/${key}`}>
-                    <li className="main-page__top-item">
-                        <div className="main-page__item-body">
-                            <img src={memoryPlugLink} alt="" />
-                        </div>
-                        <div className="main-page__item-label">
-                            <CloudIcon />К воспоминаниям
-                        </div>
-                    </li>
-                </NavLink>
+            {userInfo && (
+                <ul className="main-page__container">
+                    <NavLink to={`/memories/${key}`}>
+                        <li className="main-page__top-item">
+                            <div className="main-page__item-body">
+                                <img src={memoryPlugLink} alt="" />
+                            </div>
+                            <div className="main-page__item-label">
+                                <CloudIcon />К воспоминаниям
+                            </div>
+                        </li>
+                    </NavLink>
 
-                <NavLink to={`/gallery/${key}`}>
-                    <li className="main-page__bottom-item">
-                        <div className="main-page__item-body">
-                            <img src={galleryPlugLink} alt="" />
-                        </div>
-                        <div className="main-page__item-label">
-                            <GalleryIcon />
-                            Галерея
-                        </div>
-                    </li>
-                </NavLink>
-            </ul>
+                    <NavLink to={`/gallery/${key}`}>
+                        <li className="main-page__bottom-item">
+                            <div className="main-page__item-body">
+                                <img src={galleryPlugLink} alt="" />
+                            </div>
+                            <div className="main-page__item-label">
+                                <GalleryIcon />
+                                Галерея
+                            </div>
+                        </li>
+                    </NavLink>
+                </ul>
+            )}
+            {!userInfo && <div className="main-page__no-user">User not found</div>}
         </div>
     );
 };
