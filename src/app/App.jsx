@@ -16,8 +16,8 @@ const App = () => {
                         {/* <Route path="/" element={<Navigate to="/main" />} />
                         <Route path="/main" element={<MainPage />} /> */}
                         <Route path="/:key" element={<MainPage />} />
-                        <Route path="/gallery" element={<GalleryPage />} />
-                        <Route path="/memories" element={<MemoriesPage />} />
+                        <Route path="/gallery/:key" element={<GalleryPage />} />
+                        <Route path="/memories/:key" element={<MemoriesPage />} />
                     </Routes>
                 </Suspense>
             </Layout>

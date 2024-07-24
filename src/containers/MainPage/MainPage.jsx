@@ -32,7 +32,7 @@ const MainPage = () => {
     return (
         <div className="main-page">
             <ul className="main-page__container">
-                <NavLink to={'/memories'}>
+                <NavLink to={`/memories/${key}`}>
                     <li className="main-page__top-item">
                         <div className="main-page__item-body">
                             <img src={memoryPlugLink} alt="" />
@@ -43,7 +43,7 @@ const MainPage = () => {
                     </li>
                 </NavLink>
 
-                <NavLink to={'/gallery'}>
+                <NavLink to={`/gallery/${key}`}>
                     <li className="main-page__bottom-item">
                         <div className="main-page__item-body">
                             <img src={galleryPlugLink} alt="" />
