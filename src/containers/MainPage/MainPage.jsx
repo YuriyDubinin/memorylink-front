@@ -9,14 +9,20 @@ import GalleryIcon from './assets/gallery.svg?jsx';
 import GalleryPlug from './assets/gallery-plug.jpeg?jsx';
 import MemoriesPlug from './assets/memories-plug.jpeg?jsx';
 
-// import {getUser} from '../../api/users';
-
-import {fetchUserInfo} from '../../slices/userSlice';
+import {fetchUserInfo, selectUserInfo} from '../../slices/userSlice';
 
 const MainPage = () => {
     const dispatch = useDispatch();
     const {key} = useParams();
-    const link = `http://localhost:3305/static/users/${key}/photos/ce46c243-0aeb-4c78-8a8d-5e9f7118a92d.jpg`;
+    const userInfo = useSelector(selectUserInfo);
+    const galleryPlugLink =
+        userInfo.photos && userInfo.photos[0]
+            ? `http://localhost:3305/static/users/${key}/photos/${userInfo.photos[0]}`
+            : GalleryPlug;
+    const memoryPlugLink =
+        userInfo.photos && userInfo.photos[1]
+            ? `http://localhost:3305/static/users/${key}/photos/${userInfo.photos[1]}`
+            : MemoriesPlug;
 
     useEffect(() => {
         dispatch(fetchUserInfo(key));
@@ -27,7 +33,7 @@ const MainPage = () => {
                 <NavLink to={'/memories'}>
                     <li className="main-page__top-item">
                         <div className="main-page__item-body">
-                            <img src={link} alt="" />
+                            <img src={memoryPlugLink} alt="" />
                         </div>
                         <div className="main-page__item-label">
                             <CloudIcon />К воспоминаниям
@@ -38,7 +44,7 @@ const MainPage = () => {
                 <NavLink to={'/gallery'}>
                     <li className="main-page__bottom-item">
                         <div className="main-page__item-body">
-                            <img src={GalleryPlug} alt="" />
+                            <img src={galleryPlugLink} alt="" />
                         </div>
                         <div className="main-page__item-label">
                             <GalleryIcon />
