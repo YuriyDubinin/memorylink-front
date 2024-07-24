@@ -16,7 +16,6 @@ const App = () => {
                         <Route path="/:key" element={<MainPage />} />
                         <Route path="/gallery" element={<GalleryPage />} />
                         <Route path="/memories" element={<MemoriesPage />} />
-
                     </Routes>
                 </Suspense>
             </Layout>

@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const getUser = (data) => 
+export const getUserInfo = (data) =>
     axios
-        .get('http://localhost:3305/users/user', { params: data })
-        .then((res) => console.log('res: ', res?.data?.data))
+        .get('http://localhost:3305/users/user', {params: data})
+        .then((resp) => resp?.data?.data)
         .catch((err) => console.log(err));

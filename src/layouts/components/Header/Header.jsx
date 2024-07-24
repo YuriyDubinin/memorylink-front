@@ -10,13 +10,9 @@ import ListIcon from './assets/list.svg?jsx';
 
 import Modal from '../../../components/Modal/Modal';
 
-import {selectIsAuth} from '../../../slices/mainSlice';
-
 const Header = () => {
     const [loginModal, setLoginModal] = useState(false);
     const [menuSHown, setMenuShown] = useState(false);
-
-    const isAuth = useSelector(selectIsAuth);
 
     return (
         <div className="main-header">
@@ -28,12 +24,12 @@ const Header = () => {
                         <div className="main-header__bar-icon" onClick={() => setLoginModal(true)}>
                             <LoginIcon />
                         </div>
-                        {isAuth && (
+                        {true && (
                             <div className="main-header__bar-icon-badge">
                                 <CheckMarkIcon />
                             </div>
                         )}
-                        {!isAuth && (
+                        {false && (
                             <div className="main-header__bar-icon-badge main-header__bar-icon-badge_not-auth">
                                 <CircleDisableIcon />
                             </div>
