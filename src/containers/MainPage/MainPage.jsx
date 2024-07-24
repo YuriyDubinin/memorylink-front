@@ -17,11 +17,11 @@ const MainPage = () => {
     const userInfo = useSelector(selectUserInfo);
     const galleryPlugLink =
         userInfo.photos && userInfo.photos[0]
-            ? `http://localhost:3305/static/users/${key}/photos/${userInfo.photos[0]}`
+            ? `${__CONFIG.connections.HOST}/static/users/${key}/photos/${userInfo.photos[0]}`
             : GalleryPlug;
     const memoryPlugLink =
         userInfo.photos && userInfo.photos[1]
-            ? `http://localhost:3305/static/users/${key}/photos/${userInfo.photos[1]}`
+            ? `${__CONFIG.connections.HOST}/static/users/${key}/photos/${userInfo.photos[1]}`
             : MemoriesPlug;
 
     useEffect(() => {
