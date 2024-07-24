@@ -37,12 +37,10 @@
     padding: 15px;
     border-radius: 25px;
     animation: neuro-light-appearance 0.3s ease forwards;
-    height: 70vh;
     display: flex;
     flex-wrap: wrap;
-    gap: 5vw;
     overflow: auto;
-    justify-content: center;
+    gap: 15px;
 }
 .gallery-page__grid-item {
     flex: 0 0 20%;

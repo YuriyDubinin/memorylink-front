@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useSelector} from 'react-redux';
 
 import './style/MemoriesPage.scss';
@@ -9,6 +9,7 @@ const MemoriesPage = () => {
     const userInfo = useSelector(selectUserInfo);
     const videos = userInfo.videos
         ? userInfo.videos.map((item) => {
+              // eslint-disable-next-line no-undef
               return `${__CONFIG.connections.HOST}/static/users/${userInfo.key}/videos/${item}`;
           })
         : [];

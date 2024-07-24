@@ -14,7 +14,11 @@ const GalleryPage = () => {
     const userInfo = useSelector(selectUserInfo);
     const photos = userInfo.photos
         ? userInfo.photos.map((item) => {
-              return `${__CONFIG.connections.HOST}/static/users/${userInfo.key}/photos/${item}`;
+              // eslint-disable-next-line no-undef
+              return {
+                  src: `${__CONFIG.connections.HOST}/static/users/${userInfo.key}/photos/${item}`,
+                  alt: 'photo',
+              };
           })
         : [];
 
@@ -43,7 +47,7 @@ const GalleryPage = () => {
                                 className="gallery-page__grid-item"
                                 onClick={() => showPhoto(index)}
                             >
-                                <img src={item} alt="" />
+                                <img src={item.src} alt="" />
                             </li>
                         );
                     })}
