@@ -21,9 +21,9 @@ const Header = () => {
                 <li></li>
                 <li className="main-header__bar">
                     <div className="main-header__bar-item">
-                        <div className="main-header__bar-icon" onClick={() => setLoginModal(true)}>
+                        {/* <div className="main-header__bar-icon" onClick={() => setLoginModal(true)}>
                             <LoginIcon />
-                        </div>
+                        </div> */}
                         {true && (
                             <div className="main-header__bar-icon-badge">
                                 <CheckMarkIcon />

@@ -16,12 +16,12 @@ const MainPage = () => {
     const {key} = useParams();
     const userInfo = useSelector(selectUserInfo);
     const galleryPlugLink =
-        userInfo.photos && userInfo.photos[0]
+        userInfo?.photos && userInfo.photos[0]
             ? // eslint-disable-next-line no-undef
               `${__CONFIG.connections.HOST}/static/users/${key}/photos/${userInfo.photos[0]}`
             : GalleryPlug;
     const memoryPlugLink =
-        userInfo.photos && userInfo.photos[1]
+        userInfo?.photos && userInfo.photos[1]
             ? // eslint-disable-next-line no-undef
               `${__CONFIG.connections.HOST}/static/users/${key}/photos/${userInfo.photos[1]}`
             : MemoriesPlug;
