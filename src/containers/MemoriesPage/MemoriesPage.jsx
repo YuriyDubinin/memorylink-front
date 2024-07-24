@@ -1,28 +1,33 @@
 import React, {useState} from 'react';
-
-import video1 from './assets/1.mp4';
-import video2 from './assets/1.mp4';
-import video3 from './assets/1.mp4';
-import video4 from './assets/1.mp4';
+import {useSelector} from 'react-redux';
 
 import './style/MemoriesPage.scss';
 
+import {selectUserInfo} from '../../slices/userSlice';
+
 const MemoriesPage = () => {
+    const userInfo = useSelector(selectUserInfo);
+    const videos = userInfo.videos
+        ? userInfo.videos.map((item) => {
+              return `${__CONFIG.connections.HOST}/static/users/${userInfo.key}/videos/${item}`;
+          })
+        : [];
+
     return (
         <div className="memories-page">
             <ul className="memories-page__grid">
-                <video className="memories-page__grid-item" width="750" height="500" controls>
-                    <source src={video1} type="video/mp4" />
-                </video>
-                <video className="memories-page__grid-item" width="750" height="500" controls>
-                    <source src={video2} type="video/mp4" />
-                </video>
-                <video className="memories-page__grid-item" width="750" height="500" controls>
-                    <source src={video3} type="video/mp4" />
-                </video>
-                <video className="memories-page__grid-item" width="750" height="500" controls>
-                    <source src={video4} type="video/mp4" />
-                </video>
+                {videos.length > 0 &&
+                    videos.map((item, index) => (
+                        <video
+                            key={index}
+                            className="memories-page__grid-item"
+                            width="750"
+                            height="500"
+                            controls
+                        >
+                            <source src={item} type="video/mp4" />
+                        </video>
+                    ))}
             </ul>
         </div>
     );
