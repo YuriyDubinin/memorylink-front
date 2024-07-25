@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {useParams} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 
 import './style/MemoriesPage.scss';
 
@@ -8,7 +8,8 @@ import {fetchUserInfo, selectUserInfo} from '../../slices/userSlice';
 
 const MemoriesPage = () => {
     const dispatch = useDispatch();
-    const {key} = useParams();
+    const location = useLocation();
+    const compositeKey = location.pathname.slice(1) + location.search;
     const userInfo = useSelector(selectUserInfo);
     const videos = userInfo.videos
         ? userInfo.videos.map((item) => {
@@ -18,7 +19,7 @@ const MemoriesPage = () => {
         : [];
 
     useEffect(() => {
-        dispatch(fetchUserInfo(key));
+        dispatch(fetchUserInfo(compositeKey));
     }, []);
 
     return (

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import Viewer from 'react-viewer';
 import {useDispatch, useSelector} from 'react-redux';
-import {useParams} from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 
 import './style/GalleryPage.scss';
 
@@ -11,7 +11,8 @@ import {fetchUserInfo, selectUserInfo} from '../../slices/userSlice';
 
 const GalleryPage = () => {
     const dispatch = useDispatch();
-    const {key} = useParams();
+    const location = useLocation();
+    const compositeKey = location.pathname.slice(1) + location.search;
     const [visible, setVisible] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     const userInfo = useSelector(selectUserInfo);
@@ -26,7 +27,7 @@ const GalleryPage = () => {
         : [];
 
     useEffect(() => {
-        dispatch(fetchUserInfo(key));
+        dispatch(fetchUserInfo(compositeKey));
     }, []);
 
     const showPhoto = (index) => {

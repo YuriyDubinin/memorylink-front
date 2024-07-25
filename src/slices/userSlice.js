@@ -8,9 +8,9 @@ const initialState = {
     error: null,
 };
 
-export const fetchUserInfo = createAsyncThunk('user/fetchUser', async (key, thunkApi) => {
+export const fetchUserInfo = createAsyncThunk('user/fetchUser', async (compositeKey, thunkApi) => {
     try {
-        const resp = await getUserInfo({key});
+        const resp = await getUserInfo({compositeKey});
         return resp;
     } catch (err) {
         return thunkApi.rejectWithValue(err);
