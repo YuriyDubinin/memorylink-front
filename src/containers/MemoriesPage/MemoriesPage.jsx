@@ -1,15 +1,11 @@
-import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {useLocation} from 'react-router-dom';
+import React from 'react';
+import {useSelector} from 'react-redux';
 
-import './style/MemoriesPage.scss';
+import './MemoriesPage.scss';
 
-import {fetchUserInfo, selectUserInfo} from '../../slices/userSlice';
+import {selectUserInfo} from '../../slices/userSlice';
 
 const MemoriesPage = () => {
-    const dispatch = useDispatch();
-    const location = useLocation();
-    const compositeKey = location.pathname.slice(1) + location.search;
     const userInfo = useSelector(selectUserInfo);
     const videos = userInfo.videos
         ? userInfo.videos.map((item) => {
@@ -17,10 +13,6 @@ const MemoriesPage = () => {
               return `${__CONFIG.connections.HOST}/static/users/${userInfo.key}/videos/${item}`;
           })
         : [];
-
-    useEffect(() => {
-        dispatch(fetchUserInfo(compositeKey));
-    }, []);
 
     return (
         <div className="memories-page">

@@ -3,7 +3,7 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 import {getUserInfo} from '../api/users';
 
 const initialState = {
-    info: {},
+    info: {isAuth: false},
     status: 'idle',
     error: null,
 };
@@ -28,11 +28,11 @@ export const userSlice = createSlice({
             })
             .addCase(fetchUserInfo.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.info = action.payload;
+                state.info = {...action.payload, isAuth: true};
             })
             .addCase(fetchUserInfo.rejected, (state, action) => {
                 state.status = 'failed';
-                state.info = null;
+                state.info = {isAuth: false};
                 state.error = action.payload.response.data;
             });
     },

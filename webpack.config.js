@@ -29,7 +29,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: 'Memorylink',
             template: './src/index.html',
-            favicon: './src/public/favicon.ico',
+            favicon: './public/favicon.ico',
             __CONFIG: JSON.stringify(JSON_CONFIG),
         }),
         new MiniCssExtractPlugin({
@@ -80,6 +80,17 @@ module.exports = {
     },
     resolve: {
         extensions: ['*', '.js', '.ts', '.jsx', '.scss'],
+        alias: {
+            assets: `${__dirname}/src/app/assets`,
+            icons: `${__dirname}/src/app/assets/icons`,
+            components: __dirname + '/src/components',
+            api: __dirname + '/src/api',
+            containers: `${__dirname}/src/containers`,
+            helpers: __dirname + '/src/helpers',
+            slices: __dirname + '/src/slices',
+            libs: __dirname + '/src/libs',
+            layouts: `${__dirname}/src/layouts`,
+        },
     },
     devServer: {
         port: 3000,
