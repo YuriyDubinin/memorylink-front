@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {NavLink, useLocation, useNavigate} from 'react-router-dom';
+import {useLocation, useNavigate} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 
 import './AuthPage.scss';
@@ -7,6 +7,7 @@ import './AuthPage.scss';
 import Login from './elements/CreateUserForm/Login';
 
 import {fetchUserInfo, selectUserInfo} from 'slices/userSlice';
+import {checkUser} from 'api/users';
 
 const AuthPage = () => {
     const dispatch = useDispatch();
@@ -16,22 +17,14 @@ const AuthPage = () => {
     const userInfo = useSelector(selectUserInfo);
 
     useEffect(() => {
-        dispatch(fetchUserInfo(compositeKey));
+        checkUser(compositeKey).catch(() => navigate('/main')); // user not found
     }, []);
 
-    if (!userInfo.password) {
-        navigate('/main');
-    }
-
-    if (userInfo.password) {
-        return (
-            <div className="auth-page">
-                <Login />
-            </div>
-        );
-    }
-
-    return null; // вернуть null пока редирект не произошел
+    return (
+        <div className="auth-page">
+            <Login />
+        </div>
+    );
 };
 
 export default AuthPage;

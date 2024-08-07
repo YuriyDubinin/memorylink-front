@@ -6,13 +6,13 @@ import './style/index.scss';
 
 import {store} from './libs/Store/store';
 
-import App from './app/App';
+import AppRouter from 'components/AppRouter/AppRouter';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
     <Provider store={store}>
-        <App />
+        <AppRouter />
     </Provider>,
 );
 

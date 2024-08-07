@@ -81,8 +81,6 @@ module.exports = {
     resolve: {
         extensions: ['*', '.js', '.ts', '.jsx', '.scss'],
         alias: {
-            assets: `${__dirname}/src/app/assets`,
-            icons: `${__dirname}/src/app/assets/icons`,
             components: __dirname + '/src/components',
             api: __dirname + '/src/api',
             containers: `${__dirname}/src/containers`,

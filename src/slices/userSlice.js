@@ -12,8 +12,8 @@ export const fetchUserInfo = createAsyncThunk('user/fetchUser', async (composite
     try {
         const resp = await getUserInfo({compositeKey});
         return resp;
-    } catch (err) {
-        return thunkApi.rejectWithValue(err);
+    } catch (error) {
+        return thunkApi.rejectWithValue(error);
     }
 });
 
