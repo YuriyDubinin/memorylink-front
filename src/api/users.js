@@ -10,3 +10,6 @@ export const getUserInfo = (data) =>
 
 export const checkUser = (compositeKey) =>
     axios.get('http://localhost:3305/users/user/check', {params: {compositeKey}});
+
+export const login = (compositeKey, password) =>
+    axios.get('http://localhost:3305/users/user/login', {params: {compositeKey, password}});

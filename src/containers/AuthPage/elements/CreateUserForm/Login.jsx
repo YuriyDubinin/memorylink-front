@@ -1,20 +1,24 @@
 import React from 'react';
-import {useSelector} from 'react-redux';
-import {useNavigate} from 'react-router-dom';
 import {useForm} from 'react-hook-form';
 import toast from 'react-hot-toast';
+import {useLocation, useNavigate} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 
 import './Login.scss';
 
 import InfoIcon from './assets/info.svg?jsx';
 
-import {selectUserInfo} from 'slices/userSlice';
+import {validateSimpleRequired} from 'helpers/validation';
 
-import {validateSimpleRequired} from '../../../../helpers/validation';
+import {fetchUserInfo} from 'slices/userSlice';
+
+import {login} from 'api/users';
 
 const Login = () => {
-    const userInfo = useSelector(selectUserInfo);
+    const dispatch = useDispatch();
+    const location = useLocation();
     const navigate = useNavigate();
+    const compositeKey = location.pathname.slice(1) + location.search;
     const {
         register,
         handleSubmit,
@@ -28,18 +32,31 @@ const Login = () => {
 
     const fieldDescription = {
         password: 'Пароль',
-        wrongCredentials: 'Неверный пользователь или пароль',
+        wrongCredentials: 'Неверный пароль',
+    };
+
+    const denyAccess = async () => {
+        await dispatch(fetchUserInfo(compositeKey));
+        navigate('/main');
     };
 
     const onSubmit = (data) => {
-        if (data.password === userInfo.password) {
-            return navigate('/main');
-        }
+        const {password} = data;
 
-        toast(fieldDescription.wrongCredentials, {
-            icon: '❌',
-            duration: 1500,
-        });
+        login(compositeKey, password)
+            .then(({data}) => {
+                if (data.data.status === 'success') {
+                    denyAccess();
+                }
+            })
+            .catch((error) => {
+                toast(fieldDescription.wrongCredentials, {
+                    icon: '❌',
+                    duration: 1500,
+                });
+
+                console.error(error?.response);
+            });
     };
 
     return (
