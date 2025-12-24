@@ -18,17 +18,17 @@ function clearLocalStorage() {
   sessionStorage.clear();
 } 
 
-function clearReduxStore() {
-    if (!store?.dispatch) return;
+// function clearReduxStore() {
+//     if (!store?.dispatch) return;
 
-  store.dispatch({ type: 'app/reset' });
-}
+//     store.dispatch({ type: 'app/reset' });
+// }
 
 export function clearUserData() {
      try {
     clearCookies();
     clearLocalStorage();
-    clearReduxStore();
+    // clearReduxStore();
   } catch (error) {
     console.error('[clearUserData] failed:', error);
   }

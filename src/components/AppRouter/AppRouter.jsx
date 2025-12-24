@@ -13,7 +13,8 @@ const App = () => {
         <BrowserRouter>
             <Layout>
                 <Suspense>
-                    <Routes>
+                    {/* protected routes to add */}
+                    <Routes> 
                         <Route path="/" element={<Navigate to="/auth" />} />
                         <Route path="/auth/:key" element={<AuthPage />} />
                         <Route path="/main" element={<MainPage />} />
