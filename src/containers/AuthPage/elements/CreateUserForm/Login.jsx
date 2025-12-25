@@ -22,7 +22,7 @@ const Login = () => {
     const {
         register,
         handleSubmit,
-        formState: {errors},
+        formState: {errors, isSubmitting},
     } = useForm({
         mode: 'all',
         defaultValues: {
@@ -71,36 +71,65 @@ const Login = () => {
                             encType="multipart/form-data"
                             onSubmit={handleSubmit(onSubmit)}
                         >
-                            <div className="default-form__input-wrapper login__input">
-                                <div
-                                    className="login__info-icon"
-                                    onClick={() => {
-                                        toast(fieldDescription.password, {
-                                            icon: 'ℹ️',
-                                            duration: 1500,
-                                        });
-                                    }}
-                                >
-                                    <InfoIcon />
-                                </div>
+                        <div className="default-form__input-wrapper login__input">
                                 <input
                                     className="default-form__input"
-                                    placeholder="Имя"
-                                    {...register('password', {
-                                        validate: (value) => validateSimpleRequired(value, true),
+                                    placeholder="Email"
+                                    type="email"
+                                    {...register('email', {
+                                        required: 'Email обязателен',
+                                        pattern: {
+                                            value: /^\S+@\S+\.\S+$/,
+                                            message: 'Некорректный email',
+                                        },
                                     })}
                                 />
-                                {errors.password && (
+                                {errors.email && (
                                     <span className="default-form__error-message">
-                                        {errors.password?.message || 'обязательное поле'}
+                                        {errors.email.message}
                                     </span>
                                 )}
                             </div>
+
+                            <div className="default-form__input-wrapper login__input">
+                                <div
+                                    className="login__info-icon"
+                                    onClick={() =>
+                                        toast(fieldDescription.password, {
+                                            icon: 'ℹ️',
+                                            duration: 1500,
+                                        })
+                                    }
+                                >
+                                    {/* <InfoIcon /> */}
+                                </div>
+
+                                <input
+                                    className="default-form__input"
+                                    placeholder="Пароль"
+                                    type="password"
+                                    {...register('password', {
+                                        required: 'Пароль обязателен',
+                                        minLength: {
+                                            value: 4,
+                                            message: 'Минимум 4 символа',
+                                        },
+                                    })}
+                                />
+
+                                {errors.password && (
+                                    <span className="default-form__error-message">
+                                        {errors.password.message}
+                                    </span>
+                                )}
+                            </div>
+
                             <button
                                 type="submit"
                                 className="default-form__submit-btn login__submit-btn"
+                                disabled={isSubmitting}
                             >
-                                Войти
+                                {isSubmitting ? 'Вход...' : 'Войти'}
                             </button>
                         </form>
                     </div>
